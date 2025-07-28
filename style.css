@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@1,400;1,700;1,900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Barlow", sans-serif;
+}
+
+header{
+  background-color: #1a1aff;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.INATEL {
+  font-family: 'Barlow';
+  font-style: italic;
+  font-weight: 0;
+  color: white;
+  font-size: 30px;
+}
+
+body {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 114vh;
+    background: url('./imagem\ inatel.webp');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+.formulario {
+    width: 900px;
+    height: 600px;
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    color: black;
+    padding: 30px 40px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.centralizar{
+    justify-content: center;
+    display: flex;
+}
+
+.TemaExposicao {
+  font-size: 38px;
+  font-style: italic;
+  color: white;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 60px;
+  padding: 5px 20px;
+  background-color: rgba(0, 0, 0, .4);
+  border-radius: 30px;
+  height: 60px;
+}
+
+
+.input-wrapper{
+    display: flex;
+    align-items: stretch;
+    border: 2px solid #ccc;
+    border-radius: 25px;
+    overflow: hidden;
+    background: white;
+    width: 650px;
+    height: 60px;
+    max-width: 800px;
+    margin-bottom: 40px;
+    justify-content: center;
+}
+
+.input-wrapper input {
+  border: none;
+  padding: 12px;
+  flex: 1;
+  font-size: 22px;
+  outline: none;
+  color: #333;
+}
+
+.input-wrapper input::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+.input-label{
+  background: #d3d3d3;
+  width: 120px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;     
+  justify-content: center; 
+  font-style: italic;
+  font-weight: 500;
+  font-size: 22px;
+  color: #000;
+  white-space: nowrap;
+  height: 100%;
+}
+
+.input-wrapper-number{
+    display: flex;
+    align-items: stretch;
+    border: 2px solid #ccc;
+    border-radius: 25px;
+    overflow: hidden;
+    background: white;
+    width: 220px;
+    height: 60px;
+}
+
+.input-wrapper-number input {
+  border: none;
+  padding: 12px;
+  flex: 1;
+  font-size: 22px;
+  outline: none;
+  color: #333;
+}
+
+.input-wrapper-number input::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+button{
+  display: block;
+  margin: 50px auto 0 auto;
+  padding: 18px 40px;
+  font-size: 26px;
+  border-radius: 30px;
+  border: none;
+  background-color: #2a35ff;
+  color: white;
+  font-style: italic;
+  cursor: pointer;
+}
