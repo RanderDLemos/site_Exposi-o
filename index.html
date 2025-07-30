@@ -14,23 +14,23 @@
 
     <div class="centralizar">
         <main class = "formulario">
-            <form>
+            <form id="registroForm">
                 <div class="centralizar">
                     <h1 class="TemaExposicao">Exposição: 60 anos do Instituto</h1>
                 </div>
 
                 <div class="input-wrapper">
                     <span class="input-label">Visitante</span>
-                    <input type="text" placeholder="Digite aqui..." />
+                    <input type="text" id="visitante" placeholder="Digite aqui..." />
                 </div>
                 <div class="input-wrapper">
                     <span class="input-label">Cidade</span>
-                    <input type="text" placeholder="Digite aqui..." />
+                    <input type="text" id="cidade" placeholder="Digite aqui..." />
                 </div>
                 <div class="centralizar">
                     <div class="input-wrapper-number">
                         <span class="input-label">Idade</span>
-                        <input type="number" placeholder="(Opcional)" />
+                        <input type="number" id="idade" placeholder="(Opcional)" />
                     </div>
                 </div>
                 <button type = "submit"> Registrar</button>
@@ -38,5 +38,6 @@
             </form>
         </main>
     </div>
+    <script src="scripts.js"></script>
 </body>
 </html>
