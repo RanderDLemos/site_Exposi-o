@@ -8,22 +8,22 @@
 }
 
 header{
-  background-color: #1a1aff;
-  color: white;
-  padding: 20px;
-  text-align: center;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 100;
+    background-color: #1a1aff;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
 }
 
 .INATEL {
-  font-family: 'Barlow';
-  font-style: italic;
-  font-weight: 0;
-  color: white;
-  font-size: 30px;
+    font-family: 'Barlow';
+    font-style: italic;
+    font-weight: 0;
+    color: white;
+    font-size: 30px;
 }
 
 body {
@@ -59,16 +59,16 @@ body {
 }
 
 .TemaExposicao {
-  font-size: 38px;
-  font-style: italic;
-  color: white;
-  text-align: center;
-  margin-top: 20px;
-  margin-bottom: 60px;
-  padding: 5px 20px;
-  background-color: rgba(0, 0, 0, .4);
-  border-radius: 30px;
-  height: 60px;
+    font-size: 38px;
+    font-style: italic;
+    color: white;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 60px;
+    padding: 5px 20px;
+    background-color: rgba(0, 0, 0, .4);
+    border-radius: 30px;
+    height: 60px;
 }
 
 
@@ -87,32 +87,32 @@ body {
 }
 
 .input-wrapper input {
-  border: none;
-  padding: 12px;
-  flex: 1;
-  font-size: 22px;
-  outline: none;
-  color: #333;
+    order: none;
+    padding: 12px;
+    flex: 1;
+    font-size: 22px;
+    outline: none;
+    color: #333;
 }
 
 .input-wrapper input::placeholder {
-  color: #aaa;
-  font-style: italic;
+    color: #aaa;
+    font-style: italic;
 }
 
 .input-label{
-  background: #d3d3d3;
-  width: 120px;
-  padding: 0 20px;
-  display: flex;
-  align-items: center;     
-  justify-content: center; 
-  font-style: italic;
-  font-weight: 500;
-  font-size: 22px;
-  color: #000;
-  white-space: nowrap;
-  height: 100%;
+    background: #d3d3d3;
+    width: 120px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;     
+    justify-content: center; 
+    font-style: italic;
+    font-weight: 500;
+    font-size: 22px;
+    color: #000;
+    white-space: nowrap;
+    height: 100%;
 }
 
 .input-wrapper-number{
@@ -127,28 +127,28 @@ body {
 }
 
 .input-wrapper-number input {
-  border: none;
-  padding: 12px;
-  flex: 1;
-  font-size: 22px;
-  outline: none;
-  color: #333;
+    border: none;
+    padding: 12px;
+    flex: 1;
+    font-size: 22px;
+    outline: none;
+    color: #333;
 }
 
 .input-wrapper-number input::placeholder {
-  color: #aaa;
-  font-style: italic;
+    color: #aaa;
+    font-style: italic;
 }
 
 button{
-  display: block;
-  margin: 50px auto 0 auto;
-  padding: 18px 40px;
-  font-size: 26px;
-  border-radius: 30px;
-  border: none;
-  background-color: #2a35ff;
-  color: white;
-  font-style: italic;
-  cursor: pointer;
+    display: block;
+    margin: 50px auto 0 auto;
+    padding: 18px 40px;
+    font-size: 26px;
+    border-radius: 30px;
+    border: none;
+    background-color: #2a35ff;
+    color: white;
+    font-style: italic;
+    cursor: pointer;
 }
