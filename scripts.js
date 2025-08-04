@@ -16,10 +16,10 @@ document.getElementById("registroForm").addEventListener("submit", function (e) 
 
 fetch(scriptURL, {
   method: 'POST',
-  headers: {
-    'Content-Type': 'text/plain;charset=utf-8'
-  },
-  body: JSON.stringify(dados)
+headers: {
+  'Content-Type': 'application/json'
+},
+
 })
 .then(response => {
   if (response.ok) {
