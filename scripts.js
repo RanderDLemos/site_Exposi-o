@@ -1,10 +1,11 @@
-let scriptURL = 'https://script.google.com/macros/s/AKfycbyDjp1RzXMCS8XaUrFoA_1HbClcutDcZ7uMYE1CzAz1x3RP_1vbKJs50rm2Kms-R9s/exec';
+(function() {
+  let scriptURL = 'https://script.google.com/macros/s/AKfycbyDjp1RzXMCS8XaUrFoA_1HbClcutDcZ7uMYE1CzAz1x3RP_1vbKJs50rm2Kms-R9s/exec';
 
-if (window.location.hostname.includes('github.io')) {
-  scriptURL = scriptURL.replace('https://script.google.com', 'https://script.googleusercontent.com');
-}
+  if (window.location.hostname.includes('github.io')) {
+    scriptURL = scriptURL.replace('https://script.google.com', 'https://script.googleusercontent.com');
+  }
 
-document.getElementById("registroForm").addEventListener("submit", async function (e) {
+  document.getElementById("registroForm").addEventListener("submit", async function(e) {
   e.preventDefault();
 
   const visitante = document.getElementById("visitante").value.trim();
@@ -39,4 +40,5 @@ document.getElementById("registroForm").addEventListener("submit", async functio
     console.error("Erro ao enviar dados:", error);
     alert("Erro de conexão. Verifique sua internet e tente novamente.");
   }
-});
+  });
+})();
