@@ -14,23 +14,24 @@ document.getElementById("registroForm").addEventListener("submit", function (e) 
 
   const dados = { visitante, cidade, idade };
 
-  fetch(scriptURL, {
-    method: 'POST',
-    body: JSON.stringify(dados),
-    headers: {
-      'Content-Type': 'application/json',
-    }
-  })
-    .then(response => {
-      if (response.ok) {
-        alert("Registro realizado com sucesso!");
-        this.reset();
-      } else {
-        alert("Erro ao registrar. Tente novamente.");
-      }
-    })
-    .catch(error => {
-      console.error("Erro ao enviar dados:", error);
-      alert("Erro ao registrar.");
-    });
+fetch(scriptURL, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'text/plain;charset=utf-8'
+  },
+  body: JSON.stringify(dados)
+})
+.then(response => {
+  if (response.ok) {
+    alert("Registro realizado com sucesso!");
+    this.reset();
+  } else {
+    alert("Erro ao registrar. Tente novamente.");
+  }
+})
+.catch(error => {
+  console.error("Erro ao enviar dados:", error);
+  alert("Erro ao registrar.");
+});
+
 });
