@@ -14,8 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
     
-    // URL corrigida - use a original do script.google.com
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyDjp1RzXMCS8XaUrFoA_1HbClcutDcZ7uMYE1CzAz1x3RP_1vbKJs50rm2Kms-R9s/exec';
+  const scriptURL = 'https://cors-anywhere.herokuapp.com/https://script.google.com/macros/s/AKfycbyDjp1RzXMCS8XaUrFoA_1HbClcutDcZ7uMYE1CzAz1x3RP_1vbKJs50rm2Kms-R9s/exec';
     
     try {
       const response = await fetch(scriptURL, {
