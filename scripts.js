@@ -5,9 +5,9 @@ const form = document.getElementById("registroForm");
 form.addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const visitante = document.getElementById("visitante").value.trim();
-  const cidade = document.getElementById("cidade").value.trim();
-  const idade = document.getElementById("idade").value.trim();
+  let visitante = document.getElementById("visitante").value.trim();
+  let cidade = document.getElementById("cidade").value.trim();
+  let idade = document.getElementById("idade").value.trim();
 
   // Verifica campos obrigatórios
   if (!visitante || !cidade) {
@@ -15,7 +15,7 @@ form.addEventListener("submit", function (e) {
     return;
   }
 
-  const dados = { visitante, cidade, idade };
+  let dados = { visitante, cidade, idade };
 
   fetch(scriptURL, {
     method: "POST",
