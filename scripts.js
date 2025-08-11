@@ -1,4 +1,4 @@
-const scriptURL = 'http://127.0.0.1:5000/registrar';
+const scriptURL = 'http://127.0.0.1:5500/localhost';
 
 const form = document.getElementById('registroForm');
 
