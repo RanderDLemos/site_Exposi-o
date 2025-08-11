@@ -2,12 +2,13 @@ from flask import Flask, request, jsonify
 from openpyxl import Workbook, load_workbook
 import os
 from datetime import datetime
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 ARQUIVO_EXCEL = "registros.xlsx"
 
-# Criar o arquivo com cabeçalho, se não existir
 if not os.path.exists(ARQUIVO_EXCEL):
     wb = Workbook()
     ws = wb.active
