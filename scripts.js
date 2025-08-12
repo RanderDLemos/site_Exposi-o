@@ -1,4 +1,4 @@
-const scriptURL = 'http://127.0.0.1:5000/registrar'; 
+const scriptURL = 'http://127.0.0.1:5500/registrar'; 
 
 const form = document.getElementById('registroForm');
 
@@ -11,7 +11,6 @@ form.addEventListener('submit', function (e) {
   let cidade = document.getElementById('cidade').value.trim();
   let idade = document.getElementById('idade').value.trim();
 
-  // Verifica campos obrigatórios
   if (!visitante || !cidade) {
     alert('Por favor, preencha os campos de Visitante e Cidade.');
     return;
