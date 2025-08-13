@@ -1,4 +1,0 @@
-pip install flask -r requirements.txt
-pip install openpyxl -r requirements.txt
-pip install datetime -r requirements.txt
-pip install flask_cors -r requirements.txt
