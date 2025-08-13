@@ -1,8 +1,7 @@
-const scriptURL = 'http://127.0.0.1:5000/registrar'; 
+// Altere esta linha (substitua pela URL real do seu serviço no Render)
+const scriptURL = 'https://site-exposi-o.onrender.com/registrar'; 
 
 const form = document.getElementById('registroForm');
-
-
 
 form.addEventListener('submit', function (e) {
   e.preventDefault();
@@ -18,30 +17,30 @@ form.addEventListener('submit', function (e) {
 
   let dados = { visitante, cidade, idade };
 
-fetch(scriptURL, {
+  fetch(scriptURL, {
     method: 'POST',
     headers: { 
-        'Content-Type': 'application/json' 
+      'Content-Type': 'application/json' 
     },
     body: JSON.stringify(dados)
-})
-.then(response => {
+  })
+  .then(response => {
     if (!response.ok) {
-        throw new Error(`Erro HTTP! Status: ${response.status}`);
+      throw new Error(`Erro HTTP! Status: ${response.status}`);
     }
-    return response.text();
-})
-.then(texto => {
-    console.log('Resposta do servidor:', texto);
-    if (texto.includes('sucesso')) {
-        alert('✅ Registro realizado com sucesso!');
-        form.reset();
+    return response.json(); // Alterado para .json() para melhor tratamento
+  })
+  .then(data => {
+    console.log('Resposta do servidor:', data);
+    if (data.status === 'sucesso') {
+      alert('✅ Registro realizado com sucesso!');
+      form.reset();
     } else {
-        alert('❌ Erro ao registrar:\n' + texto);
+      alert('❌ Erro ao registrar:\n' + (data.message || 'Erro desconhecido'));
     }
-})
-.catch(erro => {
+  })
+  .catch(erro => {
     console.error("Erro completo:", erro);
     alert("Erro ao enviar dados: " + erro.message);
+  });
 });
-})
