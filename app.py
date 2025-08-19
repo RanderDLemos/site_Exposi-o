@@ -7,9 +7,10 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app, resources={r"/registrar": {"origins": "*", "methods": ["POST"]}})
 
-ARQUIVO_EXCEL = "registros.xlsx"
+ARQUIVO_EXCEL = os.path.join(os.path.dirname(os.path.abspath(__file__)), "registros.xlsx")
 
 if not os.path.exists(ARQUIVO_EXCEL):
+    print("Arquivo Excel não encontrado, criando um novo...")
     wb = Workbook()
     ws = wb.active
     ws.title = "Visitantes"
@@ -19,7 +20,7 @@ if not os.path.exists(ARQUIVO_EXCEL):
 @app.route('/registrar', methods=['POST'])
 def registrar():
     dados = request.get_json()
-
+    print("Dados recebidos:", dados)  # <-- Adicione esta linha
     nome = dados.get("visitante", "").strip()
     cidade = dados.get("cidade", "").strip()
     idade = dados.get("idade", "").strip()
@@ -29,13 +30,20 @@ def registrar():
     if not nome or not cidade:
         return jsonify({"status": "erro", "mensagem": "Campos obrigatórios faltando"}), 400
 
-    wb = load_workbook(ARQUIVO_EXCEL)
-    ws = wb.active
-    ws.append([nome, cidade, idade, data, tema])
-    wb.save(ARQUIVO_EXCEL)
+    print('PROCURANDO ARQUIVO')
 
-    return jsonify({"status": "sucesso", "mensagem": "Registro adicionado!"})
+    try:
+        print('Arquivo encontrado: ', ARQUIVO_EXCEL)
+        wb = load_workbook(ARQUIVO_EXCEL)
+        ws = wb.active
+        ws.append([nome, cidade, idade, data, tema])
+        wb.save(ARQUIVO_EXCEL)
+    except Exception as e:
+        print("Erro ao salvar no Excel:", e)
+        return jsonify({"status": "erro", "mensagem": "Erro ao salvar registro"}), 500
 
-if __name__ == '__main__':
+    return jsonify({"status": "sucesso", "mensagem": "Registro salvo com sucesso!"}), 200
     
+if __name__ == '__main__':
+    print("Iniciando o servidor Flask...")
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
