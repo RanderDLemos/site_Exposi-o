@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Registros da Exposição</title>
+    <style>
+        body {
+            font-family: 'Barlow', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        header {
+            background-color: #1a1aff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+        h1 {
+            margin: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #1a1aff;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .actions {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #1a1aff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Barlow', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Registros da Exposição - Painel Admin</h1>
+        </header>
+        
+        <div class="actions">
+            <button onclick="carregarRegistros()">Atualizar Registros</button>
+            <button onclick="window.location.href='index.html'">Voltar para o Formulário</button>
+        </div>
+        
+        <table id="tabelaRegistros">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Cidade</th>
+                    <th>Idade</th>
+                    <th>Data</th>
+                    <th>Tema</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Os registros serão inseridos aqui via JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function carregarRegistros() {
+            fetch('http://127.0.0.1:5000/visitantes')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'sucesso') {
+                        const tbody = document.querySelector('#tabelaRegistros tbody');
+                        tbody.innerHTML = '';
+                        
+                        data.visitantes.forEach(visitante => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td>${visitante.nome}</td>
+                                <td>${visitante.cidade}</td>
+                                <td>${visitante.idade || ''}</td>
+                                <td>${visitante.data_registro}</td>
+                                <td>${visitante.tema}</td>
+                            `;
+                            tbody.appendChild(row);
+                        });
+                    } else {
+                        alert('Erro ao carregar registros: ' + data.mensagem);
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    alert('Erro ao carregar registros');
+                });
+        }
+        
+        // Carregar registros quando a página abrir
+        document.addEventListener('DOMContentLoaded', carregarRegistros);
+    </script>
+</body>
+</html>
