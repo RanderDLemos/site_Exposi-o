@@ -1,5 +1,5 @@
 // Altere esta linha (substitua pela URL real do seu serviço no Render)
-const scriptURL = 'http://127.0.0.1:5000/registrar'; 
+const scriptURL = 'http://127.0.0.1:5001/registrar';
 
 const form = document.getElementById('registroForm');
 

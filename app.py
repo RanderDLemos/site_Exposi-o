@@ -15,7 +15,7 @@ MYSQL_CONFIG = {
     'host': 'localhost',
     'database': 'exposicao_inatel',
     'user': 'usuario_inatel',
-    'password': 'UsuarioInatel',
+    'password': 'NovaSenha123',  
     'auth_plugin': 'mysql_native_password'
 }
 
@@ -123,5 +123,12 @@ def listar_visitantes():
             conexao.close()
 
 if __name__ == '__main__':
+    # Verificar se consegue conectar ao MySQL antes de iniciar
+    try:
+        criar_tabela()  # Isso testa a conexão também
+        print("✅ Conexão com MySQL bem-sucedida!")
+    except Exception as e:
+        print(f"❌ Erro na conexão MySQL: {e}")
+    
     print("Iniciando o servidor Flask com MySQL...")
     app.run(host='0.0.0.0', port=5001, debug=True)
