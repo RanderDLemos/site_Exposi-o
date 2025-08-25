@@ -6,14 +6,17 @@ from datetime import datetime
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app, resources={r"/registrar": {"origins": "*", "methods": ["POST"]}})
 
-# Configurações do MySQL (substitua com suas credenciais)
+# Configuração CORRETA do CORS
+CORS(app, resources={r"/registrar": {"origins": "*"}})
+
+# Configurações do MySQL CORRETAS
 MYSQL_CONFIG = {
     'host': 'localhost',
     'database': 'exposicao_inatel',
     'user': 'usuario_inatel',
-    'password': 'UsuarioInatel'
+    'password': 'UsuarioInatel',
+    'auth_plugin': 'mysql_native_password'
 }
 
 def criar_conexao():
@@ -93,7 +96,6 @@ def registrar():
             cursor.close()
             conexao.close()
 
-# Nova rota para listar visitantes
 @app.route('/visitantes', methods=['GET'])
 def listar_visitantes():
     try:
@@ -122,4 +124,4 @@ def listar_visitantes():
 
 if __name__ == '__main__':
     print("Iniciando o servidor Flask com MySQL...")
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5001)))
+    app.run(host='0.0.0.0', port=5001, debug=True)
