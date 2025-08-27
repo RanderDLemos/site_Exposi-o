@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify
-from openpyxl import Workbook, load_workbook
 import os
 from datetime import datetime
 from flask_cors import CORS
@@ -7,20 +6,18 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app, resources={r"/registrar": {"origins": "*", "methods": ["POST"]}})
 
-ARQUIVO_EXCEL = os.path.join(os.path.dirname(os.path.abspath(__file__)), "registros.xlsx")
+ARQUIVO_TXT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "registros.txt")
 
-if not os.path.exists(ARQUIVO_EXCEL):
-    print("Arquivo Excel não encontrado, criando um novo...")
-    wb = Workbook()
-    ws = wb.active
-    ws.title = "Visitantes"
-    ws.append(["Nome", "Cidade", "Idade", "Data", "Tema"])
-    wb.save(ARQUIVO_EXCEL)
+# Criar arquivo se não existir
+if not os.path.exists(ARQUIVO_TXT):
+    print("Arquivo TXT não encontrado, criando um novo...")
+    with open(ARQUIVO_TXT, 'w', encoding='utf-8') as f:
+        f.write("Nome|Cidade|Idade|Data|Tema\n")
 
 @app.route('/registrar', methods=['POST'])
 def registrar():
     dados = request.get_json()
-    print("Dados recebidos:", dados)  # <-- Adicione esta linha
+    print("Dados recebidos:", dados)
     nome = dados.get("visitante", "").strip()
     cidade = dados.get("cidade", "").strip()
     idade = dados.get("idade", "").strip()
@@ -30,16 +27,14 @@ def registrar():
     if not nome or not cidade:
         return jsonify({"status": "erro", "mensagem": "Campos obrigatórios faltando"}), 400
 
-    print('PROCURANDO ARQUIVO')
-
     try:
-        print('Arquivo encontrado: ', ARQUIVO_EXCEL)
-        wb = load_workbook(ARQUIVO_EXCEL)
-        ws = wb.active
-        ws.append([nome, cidade, idade, data, tema])
-        wb.save(ARQUIVO_EXCEL)
+        # Salvar no arquivo TXT (formato CSV com pipe como separador)
+        with open(ARQUIVO_TXT, 'a', encoding='utf-8') as f:
+            f.write(f"{nome}|{cidade}|{idade}|{data}|{tema}\n")
+        print("Registro salvo com sucesso!")
+        
     except Exception as e:
-        print("Erro ao salvar no Excel:", e)
+        print("Erro ao salvar no TXT:", e)
         return jsonify({"status": "erro", "mensagem": "Erro ao salvar registro"}), 500
 
     return jsonify({"status": "sucesso", "mensagem": "Registro salvo com sucesso!"}), 200
