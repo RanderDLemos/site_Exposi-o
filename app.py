@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify, send_from_directory
 import os
 from datetime import datetime
 from flask_cors import CORS
@@ -11,17 +11,18 @@ CORS(app)
 ARQUIVO_TXT = Path("/storage/emulated/0/Documents/registros.txt")
 ARQUIVO_TXT.parent.mkdir(parents=True, exist_ok=True)
 
-# Criar arquivo se não existir
 if not ARQUIVO_TXT.exists():
     with open(ARQUIVO_TXT, 'w', encoding='utf-8') as f:
         f.write("Nome|Cidade|Idade|Data|Tema\n")
 
-# ⭐ Rota principal: serve o index.html
 @app.route('/')
 def index():
-    return send_file('index.html')
+    return send_from_directory('.', 'index.html')
 
-# ⭐ Rota para registrar dados (mantém igual)
+@app.route('/<path:path>')
+def static_files(path):
+    return send_from_directory('.', path)
+
 @app.route('/registrar', methods=['POST'])
 def registrar():
     dados = request.get_json()
