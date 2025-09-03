@@ -1,26 +1,30 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 import os
 from datetime import datetime
 from flask_cors import CORS
 from pathlib import Path
 
 app = Flask(__name__)
-CORS(app, resources={r"/registrar": {"origins": "*", "methods": ["POST"]}})
+CORS(app)
 
+# Caminho do arquivo TXT (na pasta Documents visível)
 ARQUIVO_TXT = Path("/storage/emulated/0/Documents/registros.txt")
-
 ARQUIVO_TXT.parent.mkdir(parents=True, exist_ok=True)
 
+# Criar arquivo se não existir
 if not ARQUIVO_TXT.exists():
-    print("Arquivo TXT não encontrado, criando um novo...")
     with open(ARQUIVO_TXT, 'w', encoding='utf-8') as f:
         f.write("Nome|Cidade|Idade|Data|Tema\n")
 
+# ⭐ Rota principal: serve o index.html
+@app.route('/')
+def index():
+    return send_file('index.html')
+
+# ⭐ Rota para registrar dados (mantém igual)
 @app.route('/registrar', methods=['POST'])
 def registrar():
     dados = request.get_json()
-    print("Dados recebidos:", dados)
-    print("Salvando em:", ARQUIVO_TXT)  
     
     nome = dados.get("visitante", "").strip()
     cidade = dados.get("cidade", "").strip()
@@ -29,30 +33,15 @@ def registrar():
     data = datetime.now().strftime("%d/%m/%Y %H:%M")
 
     if not nome or not cidade:
-        return jsonify({"status": "erro", "mensagem": "Campos obrigatórios faltando"}), 400
+        return jsonify({"status": "erro", "mensagem": "Nome e cidade são obrigatórios"}), 400
 
     try:
         with open(ARQUIVO_TXT, 'a', encoding='utf-8') as f:
             f.write(f"{nome}|{cidade}|{idade}|{data}|{tema}\n")
-        print("Registro salvo com sucesso em:", ARQUIVO_TXT)
+        return jsonify({"status": "sucesso", "mensagem": "Registro salvo!"}), 200
         
     except Exception as e:
-        print("Erro ao salvar no TXT:", e)
-        return jsonify({"status": "erro", "mensagem": "Erro ao salvar registro"}), 500
-
-    return jsonify({"status": "sucesso", "mensagem": "Registro salvo com sucesso!"}), 200
-
-@app.route('/')
-def status():
-    return jsonify({
-        "status": "servidor_rodando",
-        "arquivo_salvo_em": str(ARQUIVO_TXT),
-        "arquivo_existe": ARQUIVO_TXT.exists(),
-        "ultima_modificacao": datetime.fromtimestamp(ARQUIVO_TXT.stat().st_mtime).strftime("%d/%m/%Y %H:%M") if ARQUIVO_TXT.exists() else "n/a"
-    })
+        return jsonify({"status": "erro", "mensagem": "Erro ao salvar"}), 500
 
 if __name__ == '__main__':
-    print("Iniciando o servidor Flask...")
-    print("📁 Arquivo será salvo em:", ARQUIVO_TXT)
-    print("📂 Pasta existe?", ARQUIVO_TXT.parent.exists())
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+    app.run(host='0.0.0.0', port=5000, debug=True)
